@@ -8,9 +8,10 @@ class User{
 	protected $password;
 	protected $dbc;
 
-	public function __construct($dbc)
+	public function __construct($dbc, $user_id)
 	{
 		$this->dbc = $dbc;
+		$this->user_id = $user_id;
 	}
 
 	/**
