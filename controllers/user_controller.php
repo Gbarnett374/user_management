@@ -1,4 +1,6 @@
 <?php
+require "../.db.php";
+require "../models/user_model.php";
 
 /**
  * This controller will be hit via AJAX and return jSON to the view. 
