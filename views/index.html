@@ -24,28 +24,30 @@
 						All fields are required.</p>
 		    		<div class="form-group">
 			    		<label>Email Address</label>
-			    		<input class="form-control" type="email" placeholder="Email">
+			    		<input ng-model="user.email" class="form-control" type="email" placeholder="Email">
 			    	</div>
 
 					<div class="form-group">
 			    		<label>First Name</label>
-			    		<input class="form-control" type ="text" placeholder="First Name">
+			    		<input ng-model="user.first_name" class="form-control" type ="text" placeholder="First Name">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Last Name</label>
-			    		<input class="form-control" type="text" placeholder="Last Name">
+			    		<input ng-model="user.last_name" class="form-control" type="text" placeholder="Last Name">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Password</label>
-			    		<input class="form-control" type="password" placeholder="Password">
+			    		<input ng-model="user.password" class="form-control" type="password" placeholder="Password">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Enter Password Again</label>
-			    		<input class="form-control" type="password" placeholder="Re-enter Password">  
+			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password">  
 					</div>
+
+					<button class="btn btn-success" ng-click="createUser()">Add</button> 
 		    	</div>
 		    	<div id="edit_users">
 		    		<table class="table table-striped">
@@ -57,16 +59,20 @@
 		    					<td>Last Name</td>
 		    					<td>Date Created</td>
 		    					<td>Last Updated</td>
+		    					<td>Edit</td>
+		    					<td>Remove</td>
 		    				</tr>
 		    			</thead>
 		    			<tbody>
-		    				<tr ng-repeat="user in users">
+		    				<tr ng-repeat="user in users" ng-show="users.length">
 		    					<td>{{user.id}}</td>
-		    					<td>{{user.email}}</td>
+		    					<td>{{user.email_address}}</td>
 		    					<td>{{user.first_name}}</td>
 		    					<td>{{user.last_name}}</td>
 		    					<td>{{user.date_created}}</td>
-		    					<td>{{user.last_updated}}</td>
+		    					<td>{{user.date_modified}}</td>
+		    					<td><button class="btn btn-small btn-info">Edit</button></td>
+		    					<td><button class="btn btn-small btn-danger">Remove</button></td>
 		    				</tr>
 		    			</tbody>
 		    		</table>
