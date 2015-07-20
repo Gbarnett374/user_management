@@ -3,6 +3,7 @@
 <head>
 	<title>User Management</title>
 	<!-- JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 
@@ -10,8 +11,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 </head>
-<body>
-	<div class="container">
+<body ng-app="userManagement">
+	<div ng-controller="userController" class="container">
 		<br />
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -21,32 +22,32 @@
 		    	<div id="add_user">
 					<p>Please enter the following information to add a user. <br />
 						All fields are required.</p>
-		    		<div class = "form-group">
+		    		<div class="form-group">
 			    		<label>Email Address</label>
-			    		<input class="form-control" type='email' placeholder="Email">
+			    		<input class="form-control" type="email" placeholder="Email">
 			    	</div>
 
 					<div class="form-group">
 			    		<label>First Name</label>
-			    		<input class="form-control" type ='text' placeholder="First Name">
+			    		<input class="form-control" type ="text" placeholder="First Name">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Last Name</label>
-			    		<input class="form-control" type='text' placeholder="Last Name">
+			    		<input class="form-control" type="text" placeholder="Last Name">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Password</label>
-			    		<input class="form-control" type='password' placeholder="Password">
+			    		<input class="form-control" type="password" placeholder="Password">
 					</div>
 					
 					<div class="form-group">
 			    		<label>Enter Password Again</label>
-			    		<input class="form-control" type='password' placeholder="Re-enter Password">  
+			    		<input class="form-control" type="password" placeholder="Re-enter Password">  
 					</div>
 		    	</div>
-		    	<div id = 'edit_users'>
+		    	<div id="edit_users">
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
@@ -59,21 +60,13 @@
 		    				</tr>
 		    			</thead>
 		    			<tbody>
-		    				<tr>
-		    					<td>Test</td>
-		    					<td>test</td>
-		    					<td>Test</td>
-		    					<td>test</td>
-		    					<td>Test</td>
-		    					<td>test</td>
-		    				</tr>
-		    				<tr>
-		    					<td>Test</td>
-		    					<td>test</td>
-		    					<td>Test</td>
-		    					<td>test</td>
-		    					<td>Test</td>
-		    					<td>test</td>
+		    				<tr ng-repeat="user in users">
+		    					<td>{{user.id}}</td>
+		    					<td>{{user.email}}</td>
+		    					<td>{{user.first_name}}</td>
+		    					<td>{{user.last_name}}</td>
+		    					<td>{{user.date_created}}</td>
+		    					<td>{{user.last_updated}}</td>
 		    				</tr>
 		    			</tbody>
 		    		</table>
@@ -82,6 +75,10 @@
 		</div>
 	</div>
 	<!-- close container --> 
+
+	<!-- Angular Scripts -->
+	<script src="../js/app.js"></script>
+	<script src="../js/userController.js"></script>
 
 </body>
 </html>
