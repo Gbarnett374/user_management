@@ -7,8 +7,13 @@ require "../models/user_model.php";
 
 if (isset($_REQUEST['add'])) {
 	try {
-		$user = NEW user($dbc, $first_name, $last_name, $email_address, $password);	
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata, true);
+		$user = NEW user($dbc);	
+		$user->setProperties($data);
 		$user->addUser();
+
+		return json_encode($data);
 		
 	}
 	catch (Exception $e) {

@@ -7,12 +7,22 @@ class User
 	protected $first_name;
 	protected $last_name;
 	protected $password;
+	protected $email_address;
 	protected $dbc;
 
 	public function __construct($dbc, $user_id = "")
 	{
 		$this->dbc = $dbc;
 		$this->user_id = $user_id;
+	}
+
+	function setProperties($user_data)
+	{
+		// print_r($user_data);
+		foreach($user_data as $k => $v) {
+			$this->$k = $this->dbc->real_escape_string($v);
+		}
+		// print_r($this);
 	}
 
 	/**
@@ -42,11 +52,14 @@ class User
 	/**
 	 * [addUser() description - adds a new user to the database.]
 	 */
-	function addUser()
+	function addUser($first_name, $last_name, $email_address, $password)
 	{
-		$sql = "INSERT INTO users
+		$sql = "INSERT INTO users.users
 		(first_name, last_name, email_address, password)
-		VALUES()";
+		VALUES('$this->first_name','$this->last_name', '$this->email_address', '$this->password')";
+
+		$query = $this->dbc->query($sql);
+
 
 	}
 

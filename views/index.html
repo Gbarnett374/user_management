@@ -24,7 +24,7 @@
 						All fields are required.</p>
 		    		<div class="form-group">
 			    		<label>Email Address</label>
-			    		<input ng-model="user.email" class="form-control" type="email" placeholder="Email">
+			    		<input ng-model="user.email_address" class="form-control" type="text" placeholder="Email">
 			    	</div>
 
 					<div class="form-group">
@@ -47,7 +47,7 @@
 			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password">  
 					</div>
 
-					<button class="btn btn-success" ng-click="createUser()">Add</button> 
+					<button class="btn btn-success" ng-click="createUser(user)">Add</button> 
 		    	</div>
 		    	<div id="edit_users">
 		    		<table class="table table-striped">
@@ -64,7 +64,7 @@
 		    				</tr>
 		    			</thead>
 		    			<tbody>
-		    				<tr ng-repeat="user in users">
+		    				<tr ng-repeat="user in users" ng-show="users.length">
 		    					<td>{{user.id}}</td>
 		    					<td>{{user.email_address}}</td>
 		    					<td>{{user.first_name}}</td>

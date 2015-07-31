@@ -16,8 +16,11 @@ app.controller('userController', function($scope, users) {
 		// ];
 	}
 	
-	$scope.createUser = function() {
+	$scope.createUser = function(user) {
 		// insert a new user to the database.
+		users.addUser(user).then(function(data){
+			getUsers();
+		});
 	}
 
 	$scope.updateUser = function(){

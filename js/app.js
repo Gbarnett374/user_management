@@ -14,8 +14,10 @@ app.service('users', ['$http', function ($http) {
 		return $http.get(base_url + '?id=' + user_id)
 	}
 
-	this.addUser = function ($user) {
-		return $http.post(base_url, $user, 'addUser');
+	this.addUser = function (user) {
+		return $http.post(base_url + '?add=y', user).then(function(res){
+			return res.data	
+		});
 	}
 
 	this.updateUser = function ($user) {
