@@ -2,7 +2,10 @@ app.controller('userController', function($scope, users) {
 
 	function getUsers () {
 		//call the the service and make ajax call to get all users.
-		$scope.users = users.getAllUsers(); 
+		users.getAllUsers().then(function(data){
+			$scope.users = data;
+		}); 
+		// console.log($scope.users);
 
 		//hardcoded scope for testing. 
 		// $scope.users = [

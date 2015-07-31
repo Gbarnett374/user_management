@@ -1,7 +1,6 @@
 <?php
-require "../.db.php";
+require "../include/db.php";
 require "../models/user_model.php";
-
 /**
  * This controller will be hit via AJAX and return jSON to the view. 
  */
@@ -46,6 +45,8 @@ else if (isset($_REQUEST['getUser'])) {
 else {
 	try{
 		$user = NEW user($dbc);
+		echo json_encode($user->getUsers());
+
 	}
 	catch (Exception $e) {
 

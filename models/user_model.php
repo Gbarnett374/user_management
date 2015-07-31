@@ -9,7 +9,7 @@ class User
 	protected $password;
 	protected $dbc;
 
-	public function __construct($dbc, $user_id)
+	public function __construct($dbc, $user_id = "")
 	{
 		$this->dbc = $dbc;
 		$this->user_id = $user_id;
@@ -22,13 +22,21 @@ class User
 
 	function getUsers($user_id = "")
 	{
-
-		$sql = "SELECT * FROM users";
+		$return_array = array();
+		$sql = "SELECT * FROM users.users";
 		if ($user_id != "") {
 			$sql .= " WHERE id = '" . $user_id . "'";
 			
 		}
 
+		$query = $this->dbc->query($sql);
+		while ($results = $query->fetch_assoc()) {
+			array_push($return_array, $results);
+		} 
+
+		return $return_array;
+
+	
 	}
 
 	/**
