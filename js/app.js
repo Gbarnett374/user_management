@@ -20,12 +20,14 @@ app.service('users', ['$http', function ($http) {
 		});
 	}
 
-	this.updateUser = function ($user) {
-		return $http.put(base_url, $user, 'updateUser');
+	this.updateUser = function (user) {
+		return $http.post(base_url '?update=y', $user).then(function(res){
+			return res.data;
+		});
 	}
 
 	this.setInactive = function ($user_id) {
-		return $http.put(base_url, $user_id, 'setInactive' );
+		return $http.post(base_url, $user_id, 'setInactive' );
 	}
 
 }]);

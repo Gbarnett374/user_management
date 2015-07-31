@@ -15,7 +15,10 @@ class User
 		$this->dbc = $dbc;
 		$this->user_id = $user_id;
 	}
-
+/**
+ * [setProperties - Sets the properties of the object.]
+ * @param [array] $user_data [an array of the user inputs]
+ */
 	function setProperties($user_data)
 	{
 		// print_r($user_data);
@@ -45,14 +48,12 @@ class User
 		} 
 
 		return $return_array;
-
-	
 	}
 
 	/**
 	 * [addUser() description - adds a new user to the database.]
 	 */
-	function addUser($first_name, $last_name, $email_address, $password)
+	function addUser()
 	{
 		$sql = "INSERT INTO users.users
 		(first_name, last_name, email_address, password)
@@ -66,7 +67,10 @@ class User
 	function updateUser()
 	{
 
-		$sql = "UPDATE users SET";
+		$sql = "UPDATE users SET first_name = '$this->first_name',
+		 last_name = '$this->last_name',
+		 email_address = '$this->email_address,
+		 password = '$this->password'";
 
 	}
 

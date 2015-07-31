@@ -25,7 +25,9 @@ app.controller('userController', function($scope, users) {
 
 	$scope.updateUser = function(){
 		//update user in the database.
-		users.updateUser($scope.users);
+		users.updateUser(user).then(function(data){
+			getUsers();
+		})
 	}
 
 	$scope.setInactive = function(){

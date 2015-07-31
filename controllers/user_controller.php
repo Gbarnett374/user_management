@@ -22,8 +22,11 @@ if (isset($_REQUEST['add'])) {
 }
 else if (isset($_REQUEST['update'])) {
 	try {
-		$user = NEW user($dbc);	
+		$user = NEW user($dbc);
+		$postdata = file_get_contents("php://input");
+        $data = json_decode($postdata, true);	
 		$user->updateUser();
+		return json_encode($data);
 
 	}
 	catch (Exception $e) {
