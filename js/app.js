@@ -10,8 +10,10 @@ app.service('users', ['$http', function ($http) {
 		});
 	}
 
-	this.getUser = function ($user_id) {
-		return $http.get(base_url + '?id=' + user_id)
+	this.getUser = function (user_id) {
+		return $http.get(base_url + '?id=' + user_id).then(function(res){
+			return res.data;
+		});
 	}
 
 	this.addUser = function (user) {
@@ -21,13 +23,15 @@ app.service('users', ['$http', function ($http) {
 	}
 
 	this.updateUser = function (user) {
-		return $http.post(base_url '?update=y', $user).then(function(res){
+		return $http.post(base_url '?update=y', user).then(function(res){
 			return res.data;
 		});
 	}
 
-	this.setInactive = function ($user_id) {
-		return $http.post(base_url, $user_id, 'setInactive' );
+	this.setInactive = function (user_id) {
+		return $http.post(base_url, user_id ).then(function(res){
+			return res.data;
+		});
 	}
 
 }]);

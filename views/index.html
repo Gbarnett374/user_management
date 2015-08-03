@@ -72,7 +72,7 @@
 		    					<td>{{user.date_created}}</td>
 		    					<td>{{user.date_modified}}</td>
 		    					<td><button class="btn btn-small btn-info">Edit</button></td>
-		    					<td><button class="btn btn-small btn-danger">Remove</button></td>
+		    					<td><button class="btn btn-small btn-danger" ng-click="(setInactive(user.id))">Remove</button></td>
 		    				</tr>
 		    			</tbody>
 		    		</table>

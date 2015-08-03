@@ -37,6 +37,7 @@ else if (isset($_REQUEST['setInactive'])) {
 	
 	try { 
 		$user = NEW user($dbc, $user_id);
+		$user->setInactive();
 	}
 	catch (Exception $e) {
 

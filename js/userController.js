@@ -23,15 +23,18 @@ app.controller('userController', function($scope, users) {
 		});
 	}
 
-	$scope.updateUser = function(){
+	$scope.updateUser = function(user){
 		//update user in the database.
 		users.updateUser(user).then(function(data){
 			getUsers();
 		})
 	}
 
-	$scope.setInactive = function(){
+	$scope.setInactive = function(user_id){
 		//sets user as inactive in the db. 
+		users.setInactive(user_id).then(function(data){
+			getUsers();
+		});
 	}
 
 	getUsers();
