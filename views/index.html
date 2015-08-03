@@ -47,6 +47,7 @@
 			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password">  
 					</div>
 
+					<input type="hidden" ng-model="user.id">
 					<button class="btn btn-success" ng-click="createUser(user)">Add</button> 
 		    	</div>
 		    	<div id="edit_users">
@@ -71,7 +72,7 @@
 		    					<td>{{user.last_name}}</td>
 		    					<td>{{user.date_created}}</td>
 		    					<td>{{user.date_modified}}</td>
-		    					<td><button class="btn btn-small btn-info">Edit</button></td>
+		    					<td><button class="btn btn-small btn-info" ng-click="editUser(user)">Edit</button></td>
 		    					<td><button class="btn btn-small btn-danger" ng-click="setInactive(user.id)">Remove</button></td>
 		    				</tr>
 		    			</tbody>

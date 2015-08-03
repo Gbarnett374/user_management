@@ -16,18 +16,29 @@ app.controller('userController', function($scope, users) {
 		// ];
 	}
 	
-	$scope.createUser = function(user) {
+	$scope.createUser = function(user){
 		// insert a new user to the database.
 		users.addUser(user).then(function(data){
 			getUsers();
 		});
 	}
 
+	$scope.editUser = function(user){
+		$scope.user = {
+			id: user.id,
+			first_name: user.first_name,
+			last_name: user.last_name,
+			email_address: user.email_address,
+			password: user.password,
+			password_2: user.password
+		};
+	}
+
 	$scope.updateUser = function(user){
 		//update user in the database.
 		users.updateUser(user).then(function(data){
 			getUsers();
-		})
+		});
 	}
 
 	$scope.setInactive = function(user_id){
