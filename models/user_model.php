@@ -12,37 +12,41 @@ class User
 
 	public function __construct($dbc, $user_id = "")
 	{
+		//Set the database Connection then set and escape the user id. 
 		$this->dbc = $dbc;
-		$this->user_id = $user_id;
+		$this->user_id = $this->dbc->real_escape_string($user_id);
 	}
 /**
- * [setProperties - Sets the properties of the object.]
+ * [setProperties - Sets the properties of the object and escapes the inputs.]
  * @param [array] $user_data [an array of the user inputs]
  */
 	function setProperties($user_data)
 	{
-		// print_r($user_data);
+		//Set properties and escape inputs. 
 		foreach($user_data as $k => $v) {
-			$this->$k = $this->dbc->real_escape_string($v);
+			if (!empty($v) && $v != '') {		
+				$this->$k = $this->dbc->real_escape_string($v);
+			} else {
+				throw new Exception("One of the properties does not have a value");
+			}
 		}
-		// print_r($this);
 	}
 
 	/**
-	 * [getUsers() description - returns all or  specified user from the database.] 
-	 * @param  int $user_id - if null then will get all users. 
+	 * [getUsers() description - returns all or  specified user from the database. if null then will get all users. ] 
 	 */
 
-	function getUsers($user_id = "")
+	function getUsers()
 	{
 		$return_array = array();
 		$sql = "SELECT * FROM users.users";
-		if ($user_id != "") {
-			$sql .= " WHERE id = '" . $user_id . "'";
-			
+		if ($this->user_id != "") {
+			$sql .= " WHERE id = '" . $this->user_id . "'";	
 		}
 
-		$query = $this->dbc->query($sql);
+		if (!$query = $this->dbc->query($sql)) {
+			throw new Exception("Error! Cannot get User's");
+		}
 		while ($results = $query->fetch_assoc()) {
 			array_push($return_array, $results);
 		} 
@@ -57,29 +61,43 @@ class User
 	{
 		$sql = "INSERT INTO users.users
 		(first_name, last_name, email_address, password)
-		VALUES('$this->first_name','$this->last_name', '$this->email_address', '$this->password')";
+		VALUES('$this->first_name',
+			'$this->last_name', 
+			'$this->email_address', 
+			'$this->password')";
 
-		$query = $this->dbc->query($sql);
-
-
+		if (!$query = $this->dbc->query($sql)) {
+			throw new Exception("Error! Cannot add new user");
+		}
 	}
-
+/**
+ * updateUser() updates a user in the database.
+ */
 	function updateUser()
 	{
 
-		$sql = "UPDATE users SET first_name = '$this->first_name',
-		 last_name = '$this->last_name',
-		 email_address = '$this->email_address,
-		 password = '$this->password'";
+		$sql = "UPDATE users SET 
+		first_name = '$this->first_name',
+		last_name = '$this->last_name',
+		email_address = '$this->email_address,
+		password = '$this->password'";
 
+		if (!$query = $this->dbc->query($sql)) {
+			throw new Exception("Error! Cannot update user");
+		}
 	}
-
+/**
+ * setInactive() sets a user in the database to in active. 
+ */
 	function setInactive()
 	{
 		$sql = "UPDATE users 
 		SET is_active = 'N' 
-		WHERE id = '" . $user_id . "'";
+		WHERE id = '" . $this->user_id . "'";
 
+		if (!$query = $this->dbc->query($sql)) {
+			throw new Exception("Error deactivateing user!");
+		}
 	}	
 }
 
