@@ -24,8 +24,12 @@ class User
 	{
 		//Set properties and escape inputs. 
 		foreach($user_data as $k => $v) {
-			if (!empty($v) && $v != '') {		
-				$this->$k = $this->dbc->real_escape_string($v);
+			if (!empty($v) && $v != '') {
+				if ($k == 'id') {
+					$this->user_id = $this->dbc->real_escape_string($v);
+				} else {					
+					$this->$k = $this->dbc->real_escape_string($v);
+				}	
 			} else {
 				throw new Exception("One of the properties does not have a value");
 			}
@@ -39,9 +43,10 @@ class User
 	function getUsers()
 	{
 		$return_array = array();
-		$sql = "SELECT * FROM users.users";
+		$sql = "SELECT * FROM users.users 
+		WHERE is_active = 'Y'";
 		if ($this->user_id != "") {
-			$sql .= " WHERE id = '" . $this->user_id . "'";	
+			$sql .= " AND id = '" . $this->user_id . "'";	
 		}
 
 		if (!$query = $this->dbc->query($sql)) {
@@ -75,15 +80,15 @@ class User
  */
 	function updateUser()
 	{
-
-		$sql = "UPDATE users SET 
+		$sql = "UPDATE users.users SET 
 		first_name = '$this->first_name',
 		last_name = '$this->last_name',
-		email_address = '$this->email_address,
-		password = '$this->password'";
+		email_address = '$this->email_address',
+		password = '$this->password'
+		WHERE id = '$this->user_id'";
 
 		if (!$query = $this->dbc->query($sql)) {
-			throw new Exception("Error! Cannot update user");
+			throw new Exception("Error! Cannot update user" . $this->dbc->error);
 		}
 	}
 /**

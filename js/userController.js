@@ -19,6 +19,8 @@ app.controller('userController', function($scope, users) {
 	$scope.createUser = function(user){
 		// insert a new user to the database.
 		users.addUser(user).then(function(data){
+			//clear scope.
+			$scope.user = {};
 			getUsers();
 		});
 	}
@@ -30,13 +32,17 @@ app.controller('userController', function($scope, users) {
 			last_name: user.last_name,
 			email_address: user.email_address,
 			password: user.password,
-			password_2: user.password
+			password2: user.password
 		};
+		$scope.visible = true;
 	}
 
 	$scope.updateUser = function(user){
 		//update user in the database.
 		users.updateUser(user).then(function(data){
+			//clear scope & set visible to false for edit button.
+			$scope.user = {};
+			$scope.visible = false;
 			getUsers();
 		});
 	}

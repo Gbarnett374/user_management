@@ -3,6 +3,7 @@ require "../include/db.php";
 require "../models/user_model.php";
 /**
  * This controller will be hit via AJAX and return jSON to the view. 
+ *Note when using post/put we need to grab the input stream & assign to a variable. 
  */
 
 if (isset($_REQUEST['add'])) {
@@ -22,20 +23,25 @@ if (isset($_REQUEST['add'])) {
 }
 else if (isset($_REQUEST['update'])) {
 	try {
+		$putdata = file_get_contents("php://input");
+        $data = json_decode($putdata, true);
+        // $user_id = $data['id'];	
 		$user = NEW user($dbc);
-		$postdata = file_get_contents("php://input");
-        $data = json_decode($postdata, true);	
+		$user->setProperties($data);
 		$user->updateUser();
 		return json_encode($data);
 
 	}
 	catch (Exception $e) {
-		
+		echo $e->getMessage();
 	}
 }
 else if (isset($_REQUEST['setInactive'])) {
 	
 	try { 
+		$putdata = file_get_contents("php://input");
+        $data = json_decode($putdata, true);
+        $user_id = $data;
 		$user = NEW user($dbc, $user_id);
 		$user->setInactive();
 	}

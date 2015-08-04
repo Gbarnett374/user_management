@@ -48,7 +48,8 @@
 					</div>
 
 					<input type="hidden" ng-model="user.id">
-					<button class="btn btn-success" ng-click="createUser(user)">Add</button> 
+					<button class="btn btn-success" ng-click="createUser(user)" ng-hide='visible'>Add</button> 
+					<button class="btn btn-info" ng-click="updateUser(user)" ng-show='visible'>Edit</button> 
 		    	</div>
 		    	<div id="edit_users">
 		    		<table class="table table-striped">

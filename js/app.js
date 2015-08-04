@@ -23,13 +23,13 @@ app.service('users', ['$http', function ($http) {
 	}
 
 	this.updateUser = function (user) {
-		return $http.post(base_url '?update=y', user).then(function(res){
+		return $http.put(base_url + '?update=y', user).then(function(res){
 			return res.data;
 		});
 	}
 
 	this.setInactive = function (user_id) {
-		return $http.post(base_url, user_id ).then(function(res){
+		return $http.put(base_url + '?setInactive=y', user_id ).then(function(res){
 			return res.data;
 		});
 	}
