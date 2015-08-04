@@ -43,7 +43,7 @@ class User
 	function getUsers()
 	{
 		$return_array = array();
-		$sql = "SELECT * FROM users.users 
+		$sql = "SELECT * FROM users 
 		WHERE is_active = 'Y'";
 		if ($this->user_id != "") {
 			$sql .= " AND id = '" . $this->user_id . "'";	
@@ -64,7 +64,7 @@ class User
 	 */
 	function addUser()
 	{
-		$sql = "INSERT INTO users.users
+		$sql = "INSERT INTO users
 		(first_name, last_name, email_address, password)
 		VALUES('$this->first_name',
 			'$this->last_name', 
@@ -80,7 +80,7 @@ class User
  */
 	function updateUser()
 	{
-		$sql = "UPDATE users.users SET 
+		$sql = "UPDATE users SET 
 		first_name = '$this->first_name',
 		last_name = '$this->last_name',
 		email_address = '$this->email_address',

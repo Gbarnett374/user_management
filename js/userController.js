@@ -34,6 +34,7 @@ app.controller('userController', function($scope, users) {
 			password: user.password,
 			password2: user.password
 		};
+		//scope visible is used to toggle add or edit button on form. 
 		$scope.visible = true;
 	}
 

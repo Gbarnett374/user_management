@@ -25,7 +25,6 @@ else if (isset($_REQUEST['update'])) {
 	try {
 		$putdata = file_get_contents("php://input");
         $data = json_decode($putdata, true);
-        // $user_id = $data['id'];	
 		$user = NEW user($dbc);
 		$user->setProperties($data);
 		$user->updateUser();
