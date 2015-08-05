@@ -5,22 +5,22 @@ app.controller('userController', function($scope, users) {
 		users.getAllUsers().then(function(data){
 			$scope.users = data;
 		}); 
-		// console.log($scope.users);
-
-		//hardcoded scope for testing. 
-		// $scope.users = [
-		// {
-		// 	id: 101,
-		// 	first_name: 'greg'
-		// }
-		// ];
 	}
-	
+
+	function clearForm(){
+		$scope.user = {};
+		$scope.visible = false;
+	}
+
+	$scope.clearForm = function(){
+		clearForm();
+	}
+
 	$scope.createUser = function(user){
 		// insert a new user to the database.
 		users.addUser(user).then(function(data){
 			//clear scope.
-			$scope.user = {};
+			clearForm();
 			getUsers();
 		});
 	}
@@ -42,8 +42,7 @@ app.controller('userController', function($scope, users) {
 		//update user in the database.
 		users.updateUser(user).then(function(data){
 			//clear scope & set visible to false for edit button.
-			$scope.user = {};
-			$scope.visible = false;
+			clearForm();
 			getUsers();
 		});
 	}
