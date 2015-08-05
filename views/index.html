@@ -55,6 +55,16 @@
 					<button class="btn btn-warning" ng-click="clearForm()">Clear</button> 
 		    	</div>
 		    	<div id="edit_users">
+		    		<br />
+		    		<div class="search">
+		    		     <div class="input-group">
+		    				<div class="input-group-addon"><i class="fa fa-search"></i></div>
+		    		    		<input type="text" class="form-control" placeholder="Search Users" ng-model="searchUsers">
+		    				</div>
+		    			</div>
+		    		</div>
+		    		<br />
+
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
@@ -110,7 +120,7 @@
 		    				</tr>
 		    			</thead>
 		    			<tbody>
-		    				<tr ng-repeat="user in users | orderBy:sortType:sortReverse	" ng-show="users.length">
+		    				<tr ng-repeat="user in users | orderBy:sortType:sortReverse | filter:searchUsers" ng-show="users.length">
 		    					<td>{{user.id}}</td>
 		    					<td>{{user.email_address}}</td>
 		    					<td>{{user.first_name}}</td>
