@@ -9,6 +9,8 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 
 </head>
 <body ng-app="userManagement">
@@ -56,18 +58,59 @@
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
-		    					<td>User ID</td>
-		    					<td>Email Address</td>
-		    					<td>First Name</td>
-		    					<td>Last Name</td>
-		    					<td>Date Created</td>
-		    					<td>Last Updated</td>
+		    					<td>
+		    						<a href="#" ng-click="sortType='id'; sortReverse = !sortReverse">User ID
+		    							<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+		    					</td>
+
+		    					<td>
+		    						<a href="#" ng-click="sortType='email_address'; sortReverse = !sortReverse">
+		    							Email Address
+		    							<span ng-show="sortType == 'email_address' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'email_address' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+								</td>
+
+		    					<td>
+		    						<a href="#" ng-click="sortType='first_name'; sortReverse = !sortReverse">
+		    							First Name
+		    							<span ng-show="sortType == 'first_name' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'first_name' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+		    					</td>
+
+		    					<td>
+		    						<a href="#" ng-click="sortType='last_name'; sortReverse = !sortReverse">
+		    							Last Name
+		    							<span ng-show="sortType == 'last_name' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'last_name' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+		    					</td>
+
+		    					<td>
+		    						<a href="#" ng-click="sortType='date_created'; sortReverse = !sortReverse">
+		    							Date Created
+		    							<span ng-show="sortType == 'date_created' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'date_created' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+		    					</td>
+
+		    					<td>
+		    						<a href="#" ng-click="sortType='date_modified'; sortReverse = !sortReverse">
+		    							Last Updated
+		    							<span ng-show="sortType == 'date_modified' && sortReverse" class="fa fa-caret-up"></span>
+		    							<span ng-show="sortType == 'date_modified' && !sortReverse" class="fa fa-caret-down"></span>
+		    						</a>
+		    					</td>
+
 		    					<td>Edit</td>
 		    					<td>Remove</td>
 		    				</tr>
 		    			</thead>
 		    			<tbody>
-		    				<tr ng-repeat="user in users" ng-show="users.length">
+		    				<tr ng-repeat="user in users | orderBy:sortType:sortReverse	" ng-show="users.length">
 		    					<td>{{user.id}}</td>
 		    					<td>{{user.email_address}}</td>
 		    					<td>{{user.first_name}}</td>

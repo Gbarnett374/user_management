@@ -1,5 +1,7 @@
 app.controller('userController', function($scope, users) {
 
+	$scope.sortType     = 'id'; // set the default sort type
+  	$scope.sortReverse  = false; 
 	function getUsers () {
 		//call the the service and make ajax call to get all users.
 		users.getAllUsers().then(function(data){
