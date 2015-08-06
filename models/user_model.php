@@ -37,7 +37,8 @@ class User
 	}
 
 	/**
-	 * [getUsers() description - returns all or  specified user from the database. if null then will get all users. ] 
+	 * [getUsers() description - returns all or specified user from the database. if null then will get all users. ] 
+	 * @return array $return_array - An array containg a specific user or all the active users in the table. 
 	 */
 
 	function getUsers()
@@ -101,7 +102,7 @@ class User
 		WHERE id = '" . $this->user_id . "'";
 
 		if (!$query = $this->dbc->query($sql)) {
-			throw new Exception("Error deactivateing user!");
+			throw new Exception("Error deactivating user!");
 		}
 	}	
 }

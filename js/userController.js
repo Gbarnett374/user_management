@@ -4,6 +4,7 @@ app.controller('userController', function($scope, users) {
 	// set the default sort field
 	$scope.sortType     = 'id'; 
   	$scope.sortReverse  = false; 
+  	
 	function getUsers () {
 		//call the the service and make ajax call to get all users.
 		users.getAllUsers().then(function(data){
@@ -14,6 +15,12 @@ app.controller('userController', function($scope, users) {
 	function clearForm(){
 		$scope.user = {};
 		$scope.visible = false;
+	}
+
+	function scroll(){
+	    $('html, body').animate({
+	        scrollTop: $('body').offset().top
+	    }, 1000);
 	}
 
 	$scope.clearForm = function(){
@@ -40,6 +47,7 @@ app.controller('userController', function($scope, users) {
 		};
 		//scope visible is used to toggle add or edit button on form. 
 		$scope.visible = true;
+		scroll();
 	}
 
 	$scope.updateUser = function(user){

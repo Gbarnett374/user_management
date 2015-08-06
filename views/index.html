@@ -10,13 +10,11 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-
 </head>
 <body ng-app="userManagement">
 	<div ng-controller="userController" class="container">
 		<br />
-		<div class="panel panel-info">
+		<div id="top" class="panel panel-info">
 			<div class="panel-heading">
 		    	<h3 class="panel-title">User Management</h3>
 		  	</div>
@@ -54,8 +52,9 @@
 					<button class="btn btn-info" ng-click="updateUser(user)" ng-show='visible'>Save</button> 
 					<button class="btn btn-warning" ng-click="clearForm()">Clear</button> 
 		    	</div>
+
 		    	<div id="edit_users">
-		    		<br />
+		    	<br />
 		    		<div class="search">
 		    		     <div class="input-group">
 		    				<div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -63,20 +62,20 @@
 		    				</div>
 		    			</div>
 		    		</div>
-		    		<br />
 
+		    		<br />
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
 		    					<td>
-		    						<a href="#" ng-click="sortType='id'; sortReverse = !sortReverse">User ID
+		    						<a ng-click="sortType='id'; sortReverse = !sortReverse">User ID
 		    							<span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
 		    						</a>
 		    					</td>
 
 		    					<td>
-		    						<a href="#" ng-click="sortType='email_address'; sortReverse = !sortReverse">
+		    						<a ng-click="sortType='email_address'; sortReverse = !sortReverse">
 		    							Email Address
 		    							<span ng-show="sortType == 'email_address' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'email_address' && !sortReverse" class="fa fa-caret-down"></span>
@@ -84,7 +83,7 @@
 								</td>
 
 		    					<td>
-		    						<a href="#" ng-click="sortType='first_name'; sortReverse = !sortReverse">
+		    						<a ng-click="sortType='first_name'; sortReverse = !sortReverse">
 		    							First Name
 		    							<span ng-show="sortType == 'first_name' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'first_name' && !sortReverse" class="fa fa-caret-down"></span>
@@ -92,7 +91,7 @@
 		    					</td>
 
 		    					<td>
-		    						<a href="#" ng-click="sortType='last_name'; sortReverse = !sortReverse">
+		    						<a ng-click="sortType='last_name'; sortReverse = !sortReverse">
 		    							Last Name
 		    							<span ng-show="sortType == 'last_name' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'last_name' && !sortReverse" class="fa fa-caret-down"></span>
@@ -100,7 +99,7 @@
 		    					</td>
 
 		    					<td>
-		    						<a href="#" ng-click="sortType='date_created'; sortReverse = !sortReverse">
+		    						<a ng-click="sortType='date_created'; sortReverse = !sortReverse">
 		    							Date Created
 		    							<span ng-show="sortType == 'date_created' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'date_created' && !sortReverse" class="fa fa-caret-down"></span>
@@ -108,7 +107,7 @@
 		    					</td>
 
 		    					<td>
-		    						<a href="#" ng-click="sortType='date_modified'; sortReverse = !sortReverse">
+		    						<a ng-click="sortType='date_modified'; sortReverse = !sortReverse">
 		    							Last Updated
 		    							<span ng-show="sortType == 'date_modified' && sortReverse" class="fa fa-caret-up"></span>
 		    							<span ng-show="sortType == 'date_modified' && !sortReverse" class="fa fa-caret-down"></span>
@@ -127,7 +126,7 @@
 		    					<td>{{user.last_name}}</td>
 		    					<td>{{user.date_created}}</td>
 		    					<td>{{user.date_modified}}</td>
-		    					<td><button class="btn btn-small btn-info" ng-click="editUser(user)">Edit</button></td>
+		    					<td><button class="btn btn-small btn-info edit" ng-click="editUser(user)">Edit</button></td>
 		    					<td><button class="btn btn-small btn-danger" ng-click="setInactive(user.id)">Remove</button></td>
 		    				</tr>
 		    			</tbody>
