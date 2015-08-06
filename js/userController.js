@@ -14,6 +14,8 @@ app.controller('userController', function($scope, users) {
 
 	function clearForm(){
 		$scope.user = {};
+		$scope.userForm.$setPristine()
+		// $scope.userform.$setValidity();
 		$scope.visible = false;
 	}
 

@@ -19,39 +19,66 @@
 		    	<h3 class="panel-title">User Management</h3>
 		  	</div>
 		  	<div class="panel-body">
-		    	<div id="add_user">
+		    	<form id="add_user" name="userForm" novalidate>
 					<p>Please enter the following information to add a user. <br />
 						All fields are required.</p>
 		    		<div class="form-group">
 			    		<label>Email Address</label>
-			    		<input ng-model="user.email_address" class="form-control" type="text" placeholder="Email">
+
+			    		<span class="validation_error" style="color:red" ng-show="userForm.email_address.$dirty && userForm.email_address.$invalid">
+			    			<span ng-show="userForm.email_address.$error.required">Email is required.</span>
+			    			<span ng-show="userForm.email_address.$error.email">Invalid email address.</span>
+			    		</span>
+
+			    		<input ng-model="user.email_address" name="email_address" class="form-control" type="email" placeholder="Email" required>
 			    	</div>
 
 					<div class="form-group">
 			    		<label>First Name</label>
-			    		<input ng-model="user.first_name" class="form-control" type ="text" placeholder="First Name">
+
+			    		<span style="color:red" ng-show="userForm.first_name.$dirty && userForm.first_name.$invalid">
+			    			<span ng-show="userForm.first_name.$error.required">First Name is required.</span>
+			    		</span>
+
+			    		<input ng-model="user.first_name" name="first_name" class="form-control" type ="text" placeholder="First Name"
+			    		required>
 					</div>
 					
 					<div class="form-group">
 			    		<label>Last Name</label>
-			    		<input ng-model="user.last_name" class="form-control" type="text" placeholder="Last Name">
+
+			    		<span style="color:red" ng-show="userForm.last_name.$dirty && userForm.last_name.$invalid">
+			    			<span ng-show="userForm.last_name.$error.required">Last Name is required.</span>
+			    		</span>
+
+			    		<input ng-model="user.last_name" name="last_name" class="form-control" type="text" placeholder="Last Name"
+			    		required>
 					</div>
 					
 					<div class="form-group">
 			    		<label>Password</label>
-			    		<input ng-model="user.password" class="form-control" type="password" placeholder="Password">
+
+			    		<span style="color:red" ng-show="userForm.password.$dirty && userForm.password.$invalid">
+			    			<span ng-show="userForm.password.$error.required">Password is required.</span>
+			    		</span>
+
+			    		<input ng-model="user.password" name="password" class="form-control" type="password" placeholder="Password"
+			    		required>
 					</div>
 					
 					<div class="form-group">
 			    		<label>Enter Password Again</label>
-			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password">  
+			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password" required>  
 					</div>
 
 					<input type="hidden" ng-model="user.id">
-					<button class="btn btn-success" ng-click="createUser(user)" ng-hide='visible'>Add</button> 
+
+					<button class="btn btn-success" ng-click="createUser(user)" ng-disabled="userForm.$pristine || userForm.$invalid && userForm.$dirty" ng-hide='visible'>Add</button> 
+
 					<button class="btn btn-info" ng-click="updateUser(user)" ng-show='visible'>Save</button> 
-					<button class="btn btn-warning" ng-click="clearForm()">Clear</button> 
-		    	</div>
+
+					<button type="reset" class="btn btn-warning" ng-click="clearForm()">Clear</button> 
+		    	</form>
 
 		    	<div id="edit_users">
 		    	<br />
