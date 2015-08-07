@@ -68,14 +68,20 @@
 					
 					<div class="form-group">
 			    		<label>Enter Password Again</label>
-			    		<input ng-model="user.password2" class="form-control" type="password" placeholder="Re-enter Password" required>  
+
+			    		<span style="color:red" ng-show="userForm.password.$dirty && userForm.password.$invalid || user.password2 != user.password">
+			    			<span ng-show="userForm.password.$error.required">Password is required.</span>
+			    			<span ng-show="user.password2 != user.password && userForm.password2.$dirty">Passwords must match.</span>
+			    		</span>
+
+			    		<input ng-model="user.password2" name="password2" class="form-control" type="password" placeholder="Re-enter Password" required>  
 					</div>
 
 					<input type="hidden" ng-model="user.id">
 
-					<button class="btn btn-success" ng-click="createUser(user)" ng-disabled="userForm.$pristine || userForm.$invalid && userForm.$dirty" ng-hide='visible'>Add</button> 
+					<button class="btn btn-success" ng-click="createUser(user)" ng-disabled="userForm.$pristine || userForm.$invalid && userForm.$dirty || user.password2 != user.password" ng-hide='visible'>Add</button> 
 
-					<button class="btn btn-info" ng-click="updateUser(user)" ng-show='visible'>Save</button> 
+					<button class="btn btn-info" ng-click="updateUser(user)" ng-disabled="userForm.$pristine || userForm.$invalid && userForm.$dirty || user.password2 != user.password" ng-show='visible'>Save</button> 
 
 					<button type="reset" class="btn btn-warning" ng-click="clearForm()">Clear</button> 
 		    	</form>
