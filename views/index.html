@@ -14,6 +14,15 @@
 <body ng-app="userManagement">
 	<div ng-controller="userController" class="container">
 		<br />
+
+		<div ng-show="showSuccess" class="alert alert-success">
+		  <strong>{{msg}}</strong>
+		</div>
+
+		<div ng-show="showError" class="alert alert-danger">
+		  <strong>{{msg}}</strong>
+		</div>
+
 		<div class="panel panel-info">
 			<div class="panel-heading">
 		    	<h3 class="panel-title">User Management</h3>

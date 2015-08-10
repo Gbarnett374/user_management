@@ -1,9 +1,11 @@
-app.controller('userController', function($scope, users) {
+app.controller('userController', function($scope, users, $timeout) {
 
 	//Sorting
 	// set the default sort field
 	$scope.sortType     = 'id'; 
-  	$scope.sortReverse  = false; 
+  	$scope.sortReverse  = false;
+  	$scope.showSuccess  = false;
+  	$scope.ShowError	= false; 
   	
 	function getUsers () {
 		//call the the service and make ajax call to get all users.
@@ -25,6 +27,24 @@ app.controller('userController', function($scope, users) {
 	    }, 1000);
 	}
 
+	function displayAlert(data){
+	//Displays the Message box in the view with the message, and will clear it after 3 seconds. 
+		if (data.Success === true) {
+			$scope.showSuccess = true;
+		} else if (data.Success === false) {
+			$scope.ShowError = true;
+		}
+
+		$scope.msg = data.msg;
+		//Clear the msg box after 3 seconds. Using angular's $timeout instead of SetTimeout() . 
+		//$timeout Needed to be injected into controller.
+
+		$timeout(function(){
+			$scope.showSuccess  = false;
+  			$scope.ShowError	= false;
+		}, 3000);
+	}
+
 	$scope.clearForm = function(){
 		clearForm();
 	}
@@ -34,6 +54,9 @@ app.controller('userController', function($scope, users) {
 		users.addUser(user).then(function(data){
 			//clear scope.
 			clearForm();
+			//Display a div notifiying the user if action was successful or not.
+			displayAlert(data);
+			//Grab all the users. 
 			getUsers();
 		});
 	}
@@ -57,6 +80,7 @@ app.controller('userController', function($scope, users) {
 		users.updateUser(user).then(function(data){
 			//clear scope & set visible to false for edit button.
 			clearForm();
+			displayAlert(data);
 			getUsers();
 		});
 	}
@@ -64,9 +88,9 @@ app.controller('userController', function($scope, users) {
 	$scope.setInactive = function(user_id){
 		//sets user as inactive in the db. 
 		users.setInactive(user_id).then(function(data){
+			displayAlert(data);
 			getUsers();
 		});
 	}
-
 	getUsers();
 });
