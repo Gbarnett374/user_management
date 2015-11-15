@@ -8,7 +8,7 @@ app.controller('userController', function($scope, users, $timeout) {
   	$scope.ShowError	= false; 
   	
 	function getUsers () {
-		//call the the service and make ajax call to get all users.
+		//call the the service and make http request to get all users.
 		users.getAllUsers().then(function(data){
 			$scope.users = data;
 		}); 

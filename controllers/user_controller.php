@@ -2,7 +2,7 @@
 require "../include/db.php";
 require "../models/user_model.php";
 /**
- * This controller will be hit via AJAX and return jSON to the view. 
+ * This controller will be hit via HTTP requests and return jSON to the view. 
  *Note when using post/put we need to grab the input stream & assign to a variable. 
  */
 
@@ -25,7 +25,7 @@ if (isset($_REQUEST['add'])) {
             'msg' => "An error occured unable to add new user!");
         echo json_encode($return_data);     
     }
-    
+
 } else if (isset($_REQUEST['update'])) {
     
     try {

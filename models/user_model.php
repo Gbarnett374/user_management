@@ -2,7 +2,6 @@
 
 class User
 {
-
     protected $user_id;
     protected $first_name;
     protected $last_name;
