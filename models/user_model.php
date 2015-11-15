@@ -12,7 +12,7 @@ class User
 
     public function __construct($dbc, $user_id = "")
     {
-        //Set the database Connection then set and escape the user id. 
+        //Set the database connection then set and escape the user id. 
         $this->dbc = $dbc;
         $this->user_id = $this->dbc->real_escape_string($user_id);
     }
@@ -106,5 +106,3 @@ class User
         }
     }   
 }
-
-?>
