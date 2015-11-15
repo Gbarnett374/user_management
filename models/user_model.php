@@ -46,7 +46,7 @@ class User
         $sql = "SELECT * FROM users 
         WHERE is_active = 'Y'";
         if ($this->user_id != "") {
-            $sql .= " AND id = '" . $this->user_id . "'";   
+            $sql .= " AND id = '{$this->user_id}'";   
         }
 
         if (!$query = $this->dbc->query($sql)) {
@@ -66,10 +66,12 @@ class User
     {
         $sql = "INSERT INTO users
         (first_name, last_name, email_address, password)
-        VALUES('{$this->first_name}',
+        VALUES(
+            '{$this->first_name}',
             '{$this->last_name}', 
             '{$this->email_address}', 
-            '{$this->password}')";
+            '{$this->password}'
+            )";
 
         if (!$query = $this->dbc->query($sql)) {
             throw new Exception("Error! Cannot add new user");
@@ -81,11 +83,11 @@ class User
     function updateUser()
     {
         $sql = "UPDATE users SET 
-        first_name = '{$this->first_name}',
-        last_name = '{$this->last_name}',
+        first_name    = '{$this->first_name}',
+        last_name     = '{$this->last_name}',
         email_address = '{$this->email_address}',
-        password = '{$this->password}'
-        WHERE id = '{$this->user_id}'";
+        password      = '{$this->password}'
+        WHERE id      = '{$this->user_id}'";
 
         if (!$query = $this->dbc->query($sql)) {
             throw new Exception("Error! Cannot update user" . $this->dbc->error);
