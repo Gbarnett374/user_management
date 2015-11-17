@@ -5,11 +5,12 @@ app.controller('userController', function($scope, users, $timeout) {
 	$scope.sortType     = 'id'; 
   	$scope.sortReverse  = false;
   	$scope.showSuccess  = false;
-  	$scope.ShowError	= false; 
+  	$scope.ShowFailure	= false; 
   	
-	function getUsers () {
+	function getUsers() {
 		//call the the service and make http request to get all users.
 		users.getAllUsers().then(function(data){
+			displayAlert(data);
 			$scope.users = data;
 		}); 
 	}
@@ -31,17 +32,19 @@ app.controller('userController', function($scope, users, $timeout) {
 		if (data.Success === true) {
 			$scope.showSuccess = true;
 		} else if (data.Success === false) {
-			$scope.ShowError = true;
+			$scope.ShowFailure = true;
 		}
-
-		$scope.msg = data.msg;
-		//Clear the msg box after 3 seconds. Using angular's $timeout instead of SetTimeout() . 
+		//Calling getUsers will overwrite the .msg property and set to undefined on success. To avoid that: 
+		if (typeof data.msg != "undefined") {
+			$scope.msg = data.msg;
+		}
+		//Clear the msg box after 4 seconds. Using angular's $timeout instead of SetTimeout() . 
 		//$timeout Needed to be injected into controller.
 
 		$timeout(function(){
 			$scope.showSuccess  = false;
-  			$scope.ShowError	= false;
-		}, 3000);
+  			$scope.ShowFailure	= false;
+		}, 4000);
 	}
 
 	$scope.clearForm = function(){
@@ -87,6 +90,7 @@ app.controller('userController', function($scope, users, $timeout) {
 	$scope.setInactive = function(user_id){
 		//sets user as inactive in the db. 
 		users.setInactive(user_id).then(function(data){
+			scroll();
 			displayAlert(data);
 			getUsers();
 		});
