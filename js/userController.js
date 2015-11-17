@@ -11,7 +11,10 @@ app.controller('userController', function($scope, users, $timeout) {
         //call the the service and make http request to get all users.
         users.getAllUsers().then(function(data){
             displayAlert(data);
-            $scope.users = data;
+            //if the msg property is not defined then we know the request successfully returned users.
+            if (typeof data.msg === "undefined") {
+                $scope.users = data;
+            } 
         }); 
     }
 
