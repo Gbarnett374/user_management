@@ -1,8 +1,8 @@
 <?php
 require "../include/db.php";
-require "../models/user_model.php";
-// Use Models\User;
-// require_once __DIR__.'/../vendor/autoload.php';
+// require "../models/user_model.php";
+require_once __DIR__.'/../vendor/autoload.php';
+Use Models\User;
 
 /**
  * This controller will be hit via HTTP requests and return jSON to the view. 
