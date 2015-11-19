@@ -27,7 +27,7 @@ app.controller('userController', function($scope, users, $timeout) {
     function scroll(){
         $('html, body').animate({
             scrollTop: $('body').offset().top
-        }, 1000);
+        }, 500);
     }
 
     function displayAlert(data){
@@ -94,7 +94,9 @@ app.controller('userController', function($scope, users, $timeout) {
         //sets user as inactive in the db. 
         users.setInactive(user_id).then(function(data){
             scroll();
-            displayAlert(data);
+            $timeout(function(){
+                displayAlert(data);
+            },  1000);
             getUsers();
         });
     }
