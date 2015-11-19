@@ -9,7 +9,7 @@ app.service('users', ['$http', function ($http) {
             return res.data;
         }, 
         function error(res) {
-            return returnError();
+            return returnError(res);
         });
     }
 
@@ -18,7 +18,7 @@ app.service('users', ['$http', function ($http) {
             return res.data;
         },
         function error(res) {
-            return returnError();
+            return returnError(res);
         });
     }
 
@@ -27,7 +27,7 @@ app.service('users', ['$http', function ($http) {
             return res.data 
         },
         function error(res) {
-            return returnError();
+            return returnError(res);
         });
     }
 
@@ -36,7 +36,7 @@ app.service('users', ['$http', function ($http) {
             return res.data;
         },
         function error(res) {
-            return returnError();
+            return returnError(res);
         });
     }
 
@@ -45,14 +45,19 @@ app.service('users', ['$http', function ($http) {
             return res.data;
         },
         function error(res) {
-            return returnError();
+            return returnError(res);
         });
     }
 
-    function returnError() {
-        return {
-            Success: false,
-            msg: "Something went wrong. We are sorry for the inconvenience."
-        };
+    function returnError(res) {
+        //If not an internal server error, then display generic error msg. 
+        if (res.status === 500) {
+            return res.data;
+        } else {
+            return {
+                Success: false,
+                msg: "Something went wrong. We are sorry for the inconvenience."
+            };
+        }
     }
 }]);

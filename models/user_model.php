@@ -1,5 +1,7 @@
 <?php 
 
+// namespace Models\User;
+
 class User
 {
     protected $user_id;

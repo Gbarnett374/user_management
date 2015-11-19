@@ -1,6 +1,9 @@
 <?php
 require "../include/db.php";
 require "../models/user_model.php";
+// Use Models\User;
+// require_once __DIR__.'/../vendor/autoload.php';
+
 /**
  * This controller will be hit via HTTP requests and return jSON to the view. 
  * Note when using post/put we need to grab the input stream & assign to a variable. 
@@ -27,6 +30,7 @@ if (isset($_REQUEST['add'])) {
             'Success' => false,
             'msg'     => "An error occured unable to add new user!"
         );
+        http_response_code(500);
         echo json_encode($return_data);     
     }
 
@@ -50,6 +54,7 @@ if (isset($_REQUEST['add'])) {
             'Success' => false,
             'msg'     => "An error occured unable to update user!"
         );
+        http_response_code(500);
         echo json_encode($return_data);
     }
 
@@ -73,6 +78,7 @@ if (isset($_REQUEST['add'])) {
             'Success' => false,
             'msg'     => "An error occured unable to de-activate user!"
         );
+        http_response_code(500);
         echo json_encode($return_data);
     }
 
@@ -86,6 +92,7 @@ if (isset($_REQUEST['add'])) {
             'Success' => false,
             'msg'     => "An error occured unable return user!"
         );
+        http_response_code(500);
         echo json_encode($return_data);
     } 
 
@@ -99,6 +106,7 @@ if (isset($_REQUEST['add'])) {
             'Success' => false,
             'msg'     => "An error occured unable return users!"
         );
+        http_response_code(500);
         echo json_encode($return_data);
     }
 }
