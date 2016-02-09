@@ -9,7 +9,7 @@ use Models\User;
  * Note when using post/put we need to grab the input stream & assign to a variable.
  */
 
-if (isset($_REQUEST['add'])) {   
+if (isset($_REQUEST['add'])) {
     try {
         $postdata = file_get_contents("php://input");
         $data     = json_decode($postdata, true);
@@ -56,7 +56,7 @@ if (isset($_REQUEST['add'])) {
         echo json_encode($returnData);
     }
 
-} else if (isset($_REQUEST['setInactive'])) {
+} elseif (isset($_REQUEST['setInactive'])) {
     try {
         $putdata = file_get_contents("php://input");
         $data    = json_decode($putdata, true);
