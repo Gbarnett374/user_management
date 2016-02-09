@@ -2,7 +2,7 @@
 require "../include/db.php";
 // require "../models/user_model.php";
 require_once __DIR__.'/../vendor/autoload.php';
-Use Models\User;
+use Models\User;
 
 /**
  * This controller will be hit via HTTP requests and return jSON to the view. 
@@ -18,20 +18,20 @@ if (isset($_REQUEST['add'])) {
         $user->setProperties($data);
         $user->addUser();
 
-        $return_data = array(
+        $returnData = array(
             'Success' => true,
             'msg'     => "Successfully added new user!"
         );
-        echo json_encode($return_data); 
+        echo json_encode($returnData); 
 
     } catch (Exception $e) {
         //return error msg to view. 
-        $return_data = array(
+        $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable to add new user!"
         );
         http_response_code(500);
-        echo json_encode($return_data);     
+        echo json_encode($returnData);     
     }
 
 } else if (isset($_REQUEST['update'])) {
@@ -43,19 +43,19 @@ if (isset($_REQUEST['add'])) {
         $user->setProperties($data);
         $user->updateUser();
 
-        $return_data = array(
+        $returnData = array(
             'Success' => true,
             'msg'     => "Successfully updated user!"
         );
-        echo json_encode($return_data);
+        echo json_encode($returnData);
 
     } catch (Exception $e) {
-        $return_data = array(
+        $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable to update user!"
         );
         http_response_code(500);
-        echo json_encode($return_data);
+        echo json_encode($returnData);
     }
 
 } else if (isset($_REQUEST['setInactive'])) {
@@ -67,19 +67,19 @@ if (isset($_REQUEST['add'])) {
         $user    = new user($dbc, $user_id);
         $user->setInactive();
 
-        $return_data = array(
+        $returnData = array(
             'Success' => true,
             'msg'     => "Successfully de-activated user!"
         );
-        echo json_encode($return_data);
+        echo json_encode($returnData);
 
     } catch (Exception $e) {
-        $return_data = array(
+        $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable to de-activate user!"
         );
         http_response_code(500);
-        echo json_encode($return_data);
+        echo json_encode($returnData);
     }
 
 } else if (isset($_REQUEST['getUser'])) {
@@ -88,12 +88,12 @@ if (isset($_REQUEST['add'])) {
         $user = new user($dbc, $user_id );  
 
     } catch (Exception $e) {
-        $return_data = array(
+        $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable return user!"
         );
         http_response_code(500);
-        echo json_encode($return_data);
+        echo json_encode($returnData);
     } 
 
 } else {
@@ -102,11 +102,11 @@ if (isset($_REQUEST['add'])) {
         $user = new user($dbc);
         echo json_encode($user->getUsers());
     } catch (Exception $e) {
-        $return_data = array(
+        $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable return users!"
         );
         http_response_code(500);
-        echo json_encode($return_data);
+        echo json_encode($returnData);
     }
 }

@@ -4,27 +4,27 @@ namespace Models;
 
 class User
 {
-    protected $user_id;
-    protected $first_name;
-    protected $last_name;
+    protected $userId;
+    protected $firstName;
+    protected $lastName;
     protected $password;
-    protected $email_address;
+    protected $emailAddress;
     protected $dbc;
 
-    public function __construct($dbc, $user_id = "")
+    public function __construct($dbc, $userId = "")
     {
         //Set the database connection then set and escape the user id. 
         $this->dbc = $dbc;
-        $this->user_id = $this->dbc->real_escape_string($user_id);
+        $this->user_id = $this->dbc->real_escape_string($userId);
     }
 /**
  * [setProperties - Sets the properties of the object and escapes the inputs.]
- * @param [array] $user_data [an array of the user inputs]
+ * @param [array] $userData [an array of the user inputs]
  */
-    function setProperties($user_data)
+    public function setProperties($userData)
     {
         //Set properties and escape inputs. 
-        foreach($user_data as $k => $v) {
+        foreach($userData as $k => $v) {
             if (!empty($v) && $v != '') {
                 if ($k == 'id') {
                     $this->user_id = $this->dbc->real_escape_string($v);
@@ -39,12 +39,12 @@ class User
 
     /**
      * [getUsers() description - returns all or specified user from the database. if null then will get all users. ] 
-     * @return array $return_array - An array containg a specific user or all the active users in the table. 
+     * @return array $returnArray - An array containg a specific user or all the active users in the table. 
      */
 
-    function getUsers()
+    public function getUsers()
     {
-        $return_array = array();
+        $returnArray = array();
         $sql = "SELECT * FROM users 
         WHERE is_active = 'Y'";
         if ($this->user_id != "") {
@@ -55,16 +55,16 @@ class User
             throw new Exception("Error! Cannot get User's");
         }
         while ($results = $query->fetch_assoc()) {
-            array_push($return_array, $results);
+            array_push($returnArray, $results);
         } 
 
-        return $return_array;
+        return $returnArray;
     }
 
     /**
      * [addUser() description - adds a new user to the database.]
      */
-    function addUser()
+    public function addUser()
     {
         $sql = "INSERT INTO users
         (first_name, last_name, email_address, password)
@@ -82,7 +82,7 @@ class User
 /**
  * updateUser() updates a user in the database.
  */
-    function updateUser()
+    public function updateUser()
     {
         $sql = "UPDATE users SET 
         first_name    = '{$this->first_name}',
@@ -98,7 +98,7 @@ class User
 /**
  * setInactive() sets a user in the database to in active. 
  */
-    function setInactive()
+    public function setInactive()
     {
         $sql = "UPDATE users 
         SET is_active = 'N' 
