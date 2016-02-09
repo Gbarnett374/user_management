@@ -5,16 +5,15 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Models\User;
 
 /**
- * This controller will be hit via HTTP requests and return jSON to the view. 
- * Note when using post/put we need to grab the input stream & assign to a variable. 
+ * This controller will be hit via HTTP requests and return jSON to the view.
+ * Note when using post/put we need to grab the input stream & assign to a variable.
  */
 
-if (isset($_REQUEST['add'])) {
-    
+if (isset($_REQUEST['add'])) {   
     try {
         $postdata = file_get_contents("php://input");
         $data     = json_decode($postdata, true);
-        $user     = new user($dbc); 
+        $user     = new user($dbc);
         $user->setProperties($data);
         $user->addUser();
 
@@ -22,20 +21,19 @@ if (isset($_REQUEST['add'])) {
             'Success' => true,
             'msg'     => "Successfully added new user!"
         );
-        echo json_encode($returnData); 
+        echo json_encode($returnData);
 
     } catch (Exception $e) {
-        //return error msg to view. 
+        //return error msg to view.
         $returnData = array(
             'Success' => false,
             'msg'     => "An error occured unable to add new user!"
         );
         http_response_code(500);
-        echo json_encode($returnData);     
+        echo json_encode($returnData);
     }
 
-} else if (isset($_REQUEST['update'])) {
-    
+} elseif (isset($_REQUEST['update'])) {
     try {
         $putdata = file_get_contents("php://input");
         $data    = json_decode($putdata, true);
@@ -59,8 +57,7 @@ if (isset($_REQUEST['add'])) {
     }
 
 } else if (isset($_REQUEST['setInactive'])) {
-    
-    try { 
+    try {
         $putdata = file_get_contents("php://input");
         $data    = json_decode($putdata, true);
         $user_id = $data;
@@ -82,10 +79,9 @@ if (isset($_REQUEST['add'])) {
         echo json_encode($returnData);
     }
 
-} else if (isset($_REQUEST['getUser'])) {
-
-    try { 
-        $user = new user($dbc, $user_id );  
+} elseif (isset($_REQUEST['getUser'])) {
+    try {
+        $user = new user($dbc, $user_id);
 
     } catch (Exception $e) {
         $returnData = array(
@@ -94,11 +90,10 @@ if (isset($_REQUEST['add'])) {
         );
         http_response_code(500);
         echo json_encode($returnData);
-    } 
+    }
 
 } else {
-
-    try{
+    try {
         $user = new user($dbc);
         echo json_encode($user->getUsers());
     } catch (Exception $e) {
