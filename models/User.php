@@ -24,7 +24,7 @@ class User
     public function setProperties($userData)
     {
         //Set properties and escape inputs. 
-        foreach($userData as $k => $v) {
+        foreach ($userData as $k => $v) {
             if (!empty($v) && $v != '') {
                 if ($k == 'id') {
                     $this->user_id = $this->dbc->real_escape_string($v);

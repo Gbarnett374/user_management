@@ -1,7 +1,11 @@
 ---
 engines:
-  duplication:
+  phpcodesniffer:
     enabled: true
+  phpmd:
+    enabled: true
+  duplication:
+    enabled: false
     config:
       languages:
       - ruby
