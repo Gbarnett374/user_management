@@ -38,7 +38,7 @@ app.controller('userController', function($scope, users, $timeout) {
             $scope.ShowFailure = true;
         }
         //Calling getUsers will overwrite the .msg property and set to undefined on success. To avoid that: 
-        if (typeof data.msg != "undefined") {
+        if (typeof data.msg !== "undefined") {
             $scope.msg = data.msg;
         }
         //Clear the msg box after 4 seconds. Using angular's $timeout instead of SetTimeout() . 
